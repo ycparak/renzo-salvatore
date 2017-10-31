@@ -5,7 +5,7 @@ var config = require('./config/database');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var expressValidator = require('express-validator');
-var fileUpload = require('express-fileUpload');
+var fileUpload = require('express-fileupload');
 var passport = require('passport');
 
 // Connect to db
