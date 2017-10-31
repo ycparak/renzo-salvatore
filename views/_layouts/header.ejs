@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width", initial-scale="1">
+
+		<title><%= title %></title>
+
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+		<!-- Typography -- >
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,500,600" rel="stylesheet">
+		<!-- Icons -->
+	    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+		<!-- Custom Styles -->
+	    <link rel='stylesheet' href='/css/styles.css' />
+
+	    <!-- JQuery -->
+	    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+	</head>
+
+	<body id="top">
+		<!-- NAVBAR -->
+		<div class="container-fluid sticky-top nav-outer">
+			<div class="container nopad-container">
+
+				<nav class="navbar navbar-expand-lg salvatore-nav nav-out" />
+
+					<a class="navbar-brand navbar-brand_left" href="/"><img src="/logo/logo1.png" alt="Renzo Salvatore Logo"></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					    <span style="font-size:32px"><i class="ion-navicon"></i></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="navbarNav">
+					    <ul class="navbar-nav mr-auto">
+							<li class="nav-item" style="border-right: 1px solid #e6e6e6; padding-right: 1em; margin-right: 1.5em">
+								<a class="nav-link" href="/products">Catalogue</a>
+							</li>
+							<% if (user && user.admin == 1) { %>
+								<li class="nav-item">
+									<a class="nav-link" href="/admin/products">Admin Area</a>
+								</li>
+							<% } else { %>
+								<li class="nav-item" style="margin: 0 .25em;">
+									<a class="nav-link cart" href="https://www.facebook.com" target="_blank">
+										<span class="menu-cart" style=""><i class="ion-social-facebook"></i></span>
+									</a>
+								</li>
+								<li class="nav-item" style="margin: 0 .25em;">
+									<a class="nav-link cart" href="https://www.instagram.com" target="_blank">
+										<span class="menu-cart" style=""><i class="ion-social-instagram"></i></span>
+									</a>
+								</li>
+								<li class="nav-item" style="margin: 0 .25em;">
+									<a class="nav-link cart" href="https://www.twitter.com" target="_blank">
+										<span class="menu-cart" style=""><i class="ion-social-twitter"></i></span>
+									</a>
+								</li>
+							<% } %>
+							
+					    </ul>
+
+						<a class="navbar-brand navbar-brand_center" href="/"><img src="/logo/logo1.png" alt="Renzo Salvatore Logo" /></a>
+
+						<ul class="navbar-nav ml-auto nav-right">
+							
+							<% if (user) { %>
+								<li class="nav-item">
+									<a class="nav-link" href="/users/account">Account</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="/users/logout">Logout</a>
+								</li>
+							<% } else { %>
+								<li class="nav-item">
+									<a class="nav-link" href="/users/register">Log In / Sign Up</a>
+								</li>
+							<% } %>
+							<li class="nav-item" style="">
+								<a class="nav-link" href="/cart/checkout"> 
+									<span class="menu-cart" style=""><i class="ion-ios-cart"></i></span>
+									<% if (typeof cart !== "undefined") { %>
+										 <span class="cart-count" id="countCart"><%= cart.length %></span>
+									<% } else { %>
+										0
+									<% } %>
+								</a>
+							</li>
+
+					    </ul>
+
+					</div>
+				</nav>
+
+			</div>
+		</div>
+		
+		<div class="container nopad-container">
+			<%- messages('messages', locals) %>
+
+			<% if (errors) {%>
+				<% errors.forEach(function(error) { %>
+					<div class="alert alert-danger"> 
+						<%= error.msg %>
+					</div>
+				<% });%>
+			<% }%>
+
+		</div>

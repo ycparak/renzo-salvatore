@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width", initial-scale="1">
+
+		<title>Renzo Salvatore | Admin Area</title>
+
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+		<!-- Typography -- >
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,500,600" rel="stylesheet">
+		<!-- Icons -->
+	    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+		<!-- Custom Styles -->
+	    <link rel='stylesheet' href='/css/admin-styles.css' />
+		<!-- JQuery -->
+	    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	    <!-- ChartJS -->
+	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+
+	</head>
+
+	<body class="admin-body" id="top">
+		<!-- NAVBAR
+		<div class="container-fluid sticky-top nav-admin">
+			<div class="container nopad-container">
+				<nav class="navbar navbar-expand-lg salvatore-nav nav-out admin-nav" />
+
+					<a class="navbar-brand nav-link back-link" href="/" style="padding:0;">
+						<button class="btn-footer btn-back"><i class="ion-ios-arrow-thin-left"></i></button>
+						<span class="back-text">Back to Site</span>
+					</a>
+
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+						<span style="font-size:32px"><i class="ion-navicon" style="color:#FFF;"></i></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="navbarNav">
+						<ul class="navbar-nav ml-auto nav-right">
+							<li class="nav-item">
+								<a class="nav-link nav-admin-link" id="nav-toggle_signin" href="admin/products">Products</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link nav-admin-link" id="nav-toggle_signin" href="admin/users">Users</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link nav-admin-link" id="nav-toggle_signin" href="admin/reports">Reports</a>
+							</li>
+					    </ul>
+					</div>
+
+				</nav>
+			</div>
+		</div> -->
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<div class="container">
+				<a class="navbar-brand" href="/">&larr; Back to Site</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="/admin/products">Products</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/admin/categories">Categories</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/admin/reports">Reports</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/users/logout">Log out</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div class="container nopad-container" style="padding: 1em 0;">
+			<%- messages('messages', locals) %>
+
+			<% if (errors) {%>
+				<% errors.forEach(function(error) { %>
+					<div class="alert alert-danger"> 
+						<%= error.msg %>
+					</div>
+				<% });%>
+			<% }%>
+
+		</div>

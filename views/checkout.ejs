@@ -1,0 +1,195 @@
+<% include _layouts/header %>
+
+<!--<div class="container nopad-container" style="margin-top: 2em; padding-bottom:0;">
+    <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <a href="/products" class="back-link">
+                <button class="btn-footer btn-back"><i class="ion-ios-arrow-thin-left"></i></button>
+                <span class="back-text">Back to catalogue</span>
+            </a>
+        </div>
+    </div>
+</div> -->
+
+<section>
+    <div class="container nopad-container" ">
+
+        <% if (typeof cart !== "undefined") { %>
+
+            <div id="promo-applied" class="alert alert-success" role="alert" style="display:none">
+              Promo code applied!
+            </div>
+            <div id="promo-not-applied" class="alert alert-danger" role="alert" style="display:none">
+              Wrong promo code entered.
+            </div>
+
+            <div class="row" class="checkout-row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" style="padding: 0 1.5em;">
+
+                    <table class="table table-default align-middle">
+                        <tbody>
+                            <% var total = 0; %>
+                            <% cart.forEach(function(product) { %>
+                                <!-- //For each item in cart -->
+                                <% var sub = parseFloat(product.qty * product.price).toFixed(2) %>
+                                <% total += +sub %>
+                                <tr>
+                                    <td><%= product.title %></td>
+                                    <td style="min-width: 6.8em">
+                                        <a href="/cart/update/<%= product.slug %>?action=add" ><button class="quant" style="margin-left: 0"><i class="ion-ios-plus-outline"></i></button></a>
+                                        <%= product.qty %>
+                                        <a href="/cart/update/<%= product.slug %>?action=remove"><button class="quant"><i class="ion-ios-minus-outline"></i></button></a>
+                                    </td>
+                                    <td>R<%= sub %></td>
+                                </tr>
+                            <% }); %>
+                            <tr>
+                                <td colspan="1"><input type="text" class="form-control" name="discount" placeholder="Enter promo code" id="promoCode"></td>
+                                <td colspan="1"><input type="button" class=" btn btn-primary" onclick="submitPromo();" value="Enter"></td>
+                                <td colspan="1" style="colour: #27A343;"><span id="discount-td" style="colour: #27A343"></span><td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" align="right" id="total" class="" value="<%= parseFloat(total).toFixed(2) %>">Total: R<%= parseFloat(total).toFixed(2) %></td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12" style="padding: 0 1.5em;">
+                    <form method="post" action="/cart/checkout" class="credit-card">
+
+                        <div class="form-body">
+                            <!-- Card Number -->
+                            <div class="form-group">
+                                <input type="text" name="card" placeholder="Card Number" class="form-control">
+                            </div>     
+                                               
+                            <!-- Date Field -->
+                            <div class="form-row date-field">
+                                <div class="form-group col-md-6">
+                                    <div class="month">
+                                        <select name="month" class="form-control" style="color: #868E96;">
+                                          <option>Select Month</option>
+                                          <option name="january" value="january">January</option>
+                                          <option name="february" value="february">February</option>
+                                          <option name="march" value="march">March</option>
+                                          <option name="april" value="april">April</option>
+                                          <option name="may" value="may">May</option>
+                                          <option name="june" value="june">June</option>
+                                          <option name="july" value="july">July</option>
+                                          <option name="august" value="august">August</option>
+                                          <option name="september" value="september">September</option>
+                                          <option name="october" value="october">October</option>
+                                          <option name="november" value="november">November</option>
+                                          <option name="december" value="december">December</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div class="year">
+                                        <select name="year" class="form-control" style="color: #868E96;>
+                                          <option>Select Date</option>
+                                          <option name="2017" value="2017">2017</option>
+                                          <option name="2018" value="2018">2018</option>
+                                          <option name="2019" value="2019">2019</option>
+                                          <option name="2020" value="2020">2020</option>
+                                          <option name="2021" value="2021">2021</option>
+                                          <option name="2022" value="2022">2022</option>
+                                          <option name="2023" value="2023">2023</option>
+                                          <option name="2024" value="2024">2024</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="cvv-input">
+                                        <input type="text" name="cvv" placeholder="CVV" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <div class="cvv-details";">
+                                        <p class="small" style="color: #a9a9a9";>3 or 4 digits usually found <br> on the signature strip</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-checkout confirm-deletion">Checkout</button>
+                    </form>
+
+                </div>
+            </div>
+
+        <% } else { %>
+
+            <div class="bg-light" style="padding: 1em 0;">
+                <p class="lead text-center" style="padding-top: 1em; padding-bottom: 1em;">There are no products to display.</p>
+            </div>
+
+        <% } %>
+    </div>
+
+</section>
+
+<section></section>
+
+<script type="text/javascript">
+
+    
+
+    $(function() {
+
+        $('button.confirm-deletion').on('click', function(e) {
+            if (!confirm('Confirm payment')) return false;
+        });
+
+    });
+
+    function submitPromo() {
+        var code = document.getElementById('promoCode').value;
+        var finalTotal = <%= parseFloat(total).toFixed(2) %>
+        var discount = 0;
+
+        switch (code) {
+            case 'promoTwitter':
+                discount = 0.1;
+                finalTotal = parseFloat(finalTotal + (finalTotal * discount)).toFixed();
+                document.getElementById('total').value = finalTotal;
+                document.getElementById('total').innerHTML = 'Total: R' + finalTotal;
+                document.getElementById('promo-applied').style.display = 'block';
+                document.getElementById('discount-td').innerHTML = '<span id="discount-td" style="colour: #27A343;">' + discount * 100 + '% off</span>';
+                document.getElementById('total').style.color = '#27A343';
+                break;
+
+            case 'promoInstagram':
+                discount = 0.15;
+                finalTotal = parseFloat(finalTotal + (finalTotal * discount)).toFixed();
+                document.getElementById('total').value = finalTotal;
+                document.getElementById('total').innerHTML = 'Total: R' + finalTotal;
+                document.getElementById('promo-applied').style.display = 'block';
+                document.getElementById('discount-td').innerHTML = '<span id="discount-td" style="colour: #27A343;">' + discount * 100 + '% off</span>';
+                document.getElementById('total').style.color = '#27A343';
+                break;
+
+            case 'promoFacebook':
+                discount = 0.2;
+                finalTotal = parseFloat(finalTotal + (finalTotal * discount)).toFixed();
+                document.getElementById('total').value = finalTotal;
+                document.getElementById('total').innerHTML = 'Total: R' + finalTotal;
+                document.getElementById('promo-applied').style.display = 'block';
+                document.getElementById('discount-td').innerHTML = '<span id="discount-td" style="colour: #27A343;">' + discount * 100 + '% off</span>';
+                document.getElementById('total').style.color = '#27A343';
+                break;
+
+            default:
+                discount = 0;
+                document.getElementById('promo-not-applied').style.display = 'block';
+                break;
+        }
+    }
+</script>
+
+<% include _layouts/footer %>

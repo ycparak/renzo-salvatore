@@ -1,0 +1,87 @@
+<% include _layouts/header %>
+
+<section id="catalogue-hero">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-xl-5 col-lg-5 col-md-8 col-sm-10 col-xs-12">
+                <h2 class="section-title text-center display-4">Catalogue</h2>
+                <p class="section-subtitle text-center">The customer is the final filter. What survives the whole process is what people wear. I’m not interested in making clothes that end up in some dusty museum.</p>
+                <p class="section-author text-center">Renzo Salvatore</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="catalogue-main" data-spy="affix">
+    <div class="container" id="catalogue-cat">
+        <div class="row filter-row justify-content-md-center">
+            <div class="col-xl-12">
+                <a class="filter-expand text-center justify-content-md-center" data-toggle="collapse" href="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
+                    <h4>Filter by Category <i class="ion-ios-arrow-down"></i></h4>
+                </a>
+
+                <div class="collapse" id="collapseFilter">
+                    <div class="row more-spacing-row">
+
+                        <% categories.forEach(function(c) { %>
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12 category-column">
+                                <div class="category-overlay">
+                                    <a style="background-image: url('site_images/<%= c.title %>.jpg');" href="/products/<%= c.slug %>" class="category-overlay-inner catalogue-image-link" id="ProductImage">
+                                        <div class="category-background-overlay">
+                                            <span class="category-overlay-content">
+                                                <h4 class="category-overlay-title"><%= c.title %></h4>
+                                                <p class="category-overlay-subtitle">View in the catalogue</p>
+                                            </span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        <% }) %>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container nopad-container">
+        <div class="row catalogue-row">
+
+            <% products.forEach(function(p) { %>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-xs-12 catalogue-column" id="p.category">
+                    <div class="catalogue-overlay">
+                        <!-- Add to Cart -->
+                        <% if (loggedIn) { %>
+                            <a href="/cart/add/<%= p.slug %>" class="catalogue-overlay-cart">
+                                <span class="catalogue-cart-content">
+                                    <span class="cart-content-fade">Add to cart</span><h3><i class="ion-ios-cart"></i></h3>
+                                </span>
+                            </a>
+                        <% } else { %>
+                            <a href="/users/register" class="catalogue-overlay-cart">
+                                <span class="catalogue-cart-content">
+                                    <span class="cart-content-fade">Log in to Add to cart</span><h3><i class="ion-ios-cart"></i></h3>
+                                </span>
+                            </a>   
+                        <% } %>
+                        
+                        
+                        <!-- Products -->
+                        <a style="background-image: url('/product_images/<%= p.id %>/<%= p.image1 %>');" href="/products/<%= p.category %>/<%= p.slug %>" class="catalogue-overlay-inner catalogue-image-link" id="ProductImage">
+                            <div class="catalogue-background-overlay">
+                                <span class="catalogue-overlay-content">
+                                    <h4 class="catalogue-overlay-title" id="ProductTitle"><%= p.title %></h4>
+                                    <p class="catalogue-overlay-subtitle" id="ProductProce">R<%= parseFloat(p.price).toFixed(2) %></p>
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            <% }); %>
+
+        </div>
+    </div>
+</section>
+
+<% include _layouts/footer %>

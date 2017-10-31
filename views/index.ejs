@@ -1,0 +1,39 @@
+<% include _layouts/header %>
+
+<header id="index-header">
+    <div class="container nopad-container index-hero">
+        <a href="/products" class="index-hero-overlay">
+            <div class="index-hero-content">
+                <h2 class="overlay-title">View the Catalogue</h1>
+                <h3 class="overlay-subtitle">by Renzo Salvatore</h2>
+            </div>
+        </a>
+    </div>
+</header>
+
+<section id="index-categories">
+    <div class="container nopad-container">
+        <div class="row">
+
+            
+
+            <% categories.forEach(function(c) { %>
+
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12 category-column">
+                    <div class="category-overlay">
+                        <a style="background-image: url('site_images/<%= c.title %>.jpg');" href="/products/<%= c.slug %>" class="category-overlay-inner catalogue-image-link" id="ProductImage">
+                            <div class="category-background-overlay">
+                                <span class="category-overlay-content">
+                                    <h4 class="category-overlay-title"><%= c.title %></h4>
+                                    <p class="category-overlay-subtitle">View in the catalogue</p>
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            <% }) %>
+
+    </div>
+</section>
+
+<% include _layouts/footer %>

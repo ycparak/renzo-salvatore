@@ -1,0 +1,26 @@
+#imgPreview1, #imgPreview2, #imgPreview3 {
+    margin: 1em;
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+#no-image {
+    display: block;
+    width: 100px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+table.align-middle td {
+  vertical-align: middle !important;
+}
+.chart-column {
+    background: #e6e6e6;
+    padding: 2em;
+}

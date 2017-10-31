@@ -1,0 +1,53 @@
+<%- include('../_layouts/adminheader') %>
+
+<section class="admin-section" id="admin-intro">
+
+    <div class="container nopad-container">
+        <h1 class="display-4" style="padding-bottom: .5em;">Products</h1>
+        <a href="/admin/products/add-product" class="btn btn-primary">Add New Product</a>
+        <br><br>
+
+        <% if(count > 0) { %>
+            <table class="table table-striped align-middle">
+
+                <thead>
+                    <tr class="home">
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Main Image</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% products.forEach(function(product) { %>
+                        <tr>
+                            <td><%= product.title %></td>
+                            <td>R<%= parseFloat(product.price).toFixed(2) %></td>
+                            <td><%= product.category %></td>
+                            <td>
+                                <% if(product.image == "") { %>
+                                    <img id="no-image" src="/img/noimage.jpg">
+                                <% } else { %>
+                                    <img id="no-image" src="/product_images/<%= product._id %>/<%= product.image1 %>">
+                                <% } %>
+                            </td>
+                            <td><a href="/admin/products/edit-product/<%= product._id %>">Edit</a></td>
+                            <td><a class="confirm-deletion" href="/admin/products/delete-product/<%= product._id %>">Delete</a></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+
+            </table>
+        <% } else { %>
+            <div class="bg-light" style="margin: 1em 0;">
+                <p class="lead text-center" style="padding-top: 1em; padding-bottom: 1em;">There are no products to display.</p>
+            </div>
+        <% } %>
+
+    </div>
+</section>
+
+<%- include('../_layouts/adminfooter') %>
